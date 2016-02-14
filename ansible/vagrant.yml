@@ -1,0 +1,44 @@
+---
+- hosts: local
+  connection: local
+  sudo: yes
+  tasks:
+    - name: install node
+      yum: name={{item}} state=installed
+      with_items:
+        - httpd
+        - mysql
+        - mysql-server
+        - MySQL-python
+        - httpd
+        - php
+        - php-mcrypt
+        - php-mysql
+        - php-mbstring
+        - phpMyAdmin
+
+    - name: be sure httpd is running and enabled
+      service: name={{item}} state=running enabled=yes
+      with_items:
+        - mysqld
+        - httpd
+
+    - name: Create database
+      mysql_db: db="cake_blog_tutorial" state=present encoding=utf8
+    - name: Create database user
+      mysql_user: >
+        name="cakeBlog"
+        password="c4k3-rUl3Z"
+        priv="cake_blog_tutorial".*:ALL
+        state=present
+
+    - name: setting httpd.conf
+      action: template src=templates/etc/httpd/conf/httpd.conf dest=/etc/httpd/conf/httpd.conf
+    - name: setting php.ini
+      replace: >-
+        dest='/etc/php.ini'
+        regexp=';date.timezone ='
+        replace='date.timezone = Asia/Tokyo'
+
+    - name: httpd restart
+      service: name=httpd state=restarted
