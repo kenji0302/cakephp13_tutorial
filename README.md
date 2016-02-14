@@ -34,18 +34,18 @@ cake_blog_tutorial
 
 ```bash
 brew install git
-git clone git@github.com:kenji0302/monju.in.git
-cd monju.in
+git clone git@github.com:kenji0302/cakephp13_tutorial.git
+cd cakephp13_tutorial
 vagrant up
 ```
 
 #### Windows ####
 
-[Github Desktop](https://desktop.github.com/)をインストール。Githubアカウントでログインして monju.in のレポジトリを取得する。
+[Github Desktop](https://desktop.github.com/)をインストール、cakephp13_tutorial のレポジトリを取得する。
 
 Github Shell を起動してコマンドを実行。
 
 ```bash
-cd monju.in
+cd cakephp13_tutorial
 vagrant up
 ```
